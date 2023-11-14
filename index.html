@@ -51,7 +51,7 @@
             container.innerHTML = "<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>";
 
             var colors = ["noir", "rouge"];
-            var isAmericanRoulette = confirm("Voulez-vous jouer à la roulette américaine ?");
+            var isAmericanRoulette = false; // On joue à la roulette européenne
 
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
@@ -88,12 +88,12 @@
                         container.innerHTML += "<p>La couleur est automatiquement Vert</p>";
                         userColor = "Vert";
                     } else {
-                        container.innerHTML += "<p>Choisissez une couleur entre Noir et Rouge.</p>";
-                        userColor = prompt("Couleur:");
+                        userColor = (parseInt(userNumber) % 2 === 0) ? "rouge" : "noir"; // Alternance des couleurs
+                        container.innerHTML += "<p>Couleur automatique : " + userColor + "</p>";
                     }
 
-                    var randomNumber = Math.floor(Math.random() * (isAmericanRoulette ? 38 : 37));
-                    var randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    var randomNumber = Math.floor(Math.random() * 37);
+                    var randomColor = (randomNumber === 0) ? "Vert" : (randomNumber % 2 === 0) ? "rouge" : "noir";
 
                     setTimeout(function () {
                         container.innerHTML += "<p>Couleur du joueur : " + userColor + "</p>";
