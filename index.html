@@ -79,64 +79,40 @@
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
 
-                var userBetColorYN = prompt("Voulez-vous parier sur une couleur ? Oui/Non");
+                container.innerHTML += "<p>Choisissez un nombre entre 0 et 36.</p>";
 
-                if (userBetColorYN.toLowerCase() === "oui") {
-                    var userBetColor = prompt("Choisissez entre noir ou rouge:");
+                var userNumber = prompt("Chiffre:");
+                var userColor;
 
-                    var randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-                    setTimeout(function () {
-                        container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
-                        container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
-
-                        if (userBetColor.toLowerCase() === randomColor) {
-                            container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
-                            document.body.className = 'win';
-                        } else {
-                            container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
-                            document.body.className = 'lose';
-                        }
-
-                        document.getElementById('restartButton').disabled = false;
-                    }, 5000);
-
+                if (userNumber === "0") {
+                    container.innerHTML += "<p>La couleur est automatiquement Vert</p>";
+                    userColor = "Vert";
                 } else {
-                    container.innerHTML += "<p>Choisissez un nombre entre 0 et 36.</p>";
+                    userColor = (parseInt(userNumber) % 2 === 0) ? "rouge" : "noir"; // Alternance des couleurs
+                    container.innerHTML += "<p>Couleur automatique : " + userColor + "</p>";
+                }
 
-                    var userNumber = prompt("Chiffre:");
-                    var userColor;
+                var randomNumber = Math.floor(Math.random() * 37);
+                var randomColor = (randomNumber === 0) ? "Vert" : (randomNumber % 2 === 0) ? "rouge" : "noir";
+                    container.innerHTML += "La roue est en train de tourner .....";
+                setTimeout(function () {
+                    container.innerHTML += "<p>Couleur du joueur : " + userColor + "</p>";
+                    container.innerHTML += "<p>Nombre du joueur : " + userNumber + "</p>";
+                    container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
+                    container.innerHTML += "<p>Nombre tiré au sort : " + randomNumber + "</p>";
 
-                    if (userNumber === "0") {
-                        container.innerHTML += "<p>La couleur est automatiquement Vert</p>";
-                        userColor = "Vert";
+                    var isWinner = checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette);
+
+                    if (isWinner) {
+                        container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
+                        document.body.className = 'win';
                     } else {
-                        userColor = (parseInt(userNumber) % 2 === 0) ? "rouge" : "noir"; // Alternance des couleurs
-                        container.innerHTML += "<p>Couleur automatique : " + userColor + "</p>";
+                        container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
+                        document.body.className = 'lose';
                     }
 
-                    var randomNumber = Math.floor(Math.random() * 37);
-                    var randomColor = (randomNumber === 0) ? "Vert" : (randomNumber % 2 === 0) ? "rouge" : "noir";
-                        container.innerHTML += "La roue est en train de tourner .....";
-                    setTimeout(function () {
-                        container.innerHTML += "<p>Couleur du joueur : " + userColor + "</p>";
-                        container.innerHTML += "<p>Nombre du joueur : " + userNumber + "</p>";
-                        container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
-                        container.innerHTML += "<p>Nombre tiré au sort : " + randomNumber + "</p>";
-
-                        var isWinner = checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette);
-
-                        if (isWinner) {
-                            container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
-                            document.body.className = 'win';
-                        } else {
-                            container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
-                            document.body.className = 'lose';
-                        }
-
-                        document.getElementById('restartButton').disabled = false;
-                    }, 5000);
-                }
+                    document.getElementById('restartButton').disabled = false;
+                }, 5000);
             }, 2000);
         }
 
