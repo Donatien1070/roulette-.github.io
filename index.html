@@ -51,6 +51,7 @@
             container.innerHTML = "<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>";
 
             var colors = ["noir", "rouge"];
+            var isAmericanRoulette = confirm("Voulez-vous jouer à la roulette américaine ?");
 
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
@@ -91,7 +92,7 @@
                         userColor = prompt("Couleur:");
                     }
 
-                    var randomNumber = Math.floor(Math.random() * 37);
+                    var randomNumber = Math.floor(Math.random() * (isAmericanRoulette ? 38 : 37));
                     var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
                     setTimeout(function () {
@@ -100,7 +101,9 @@
                         container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
                         container.innerHTML += "<p>Nombre tiré au sort : " + randomNumber + "</p>";
 
-                        if (userNumber == randomNumber && userColor.toLowerCase() === randomColor) {
+                        var isWinner = checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette);
+
+                        if (isWinner) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
                             document.body.className = 'win';
                         } else {
@@ -112,6 +115,16 @@
                     }, 5000);
                 }
             }, 2000);
+        }
+
+        function checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette) {
+            if (userNumber == randomNumber && userColor.toLowerCase() === randomColor) {
+                return true;
+            } else if (isAmericanRoulette && randomNumber === 37 && userNumber === "00") {
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
 
