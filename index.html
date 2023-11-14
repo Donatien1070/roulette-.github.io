@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            transition: background-color 1s ease; /* Transition de couleur pour une expérience plus agréable */
         }
 
         #container {
@@ -25,6 +25,15 @@
 
         h2, h3, p {
             text-align: center;
+        }
+
+        /* Ajout de classes pour les arrière-plans gagnants et perdants */
+        body.win {
+            background-color: #4CAF50; /* Vert pour la victoire */
+        }
+
+        body.lose {
+            background-color: #FF5733; /* Rouge pour la défaite */
         }
     </style>
 </head>
@@ -49,7 +58,7 @@
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
 
-                var user_bet_color_yn = prompt("voulez-vous parier sur une couleur ? si 'non', vous pariez sur un nombre et une couleur. Oui/Non");
+                var user_bet_color_yn = prompt("Si vous voulez parier sur une couleur ? Si NON, vous pariez sur un nombre et une couleur. Oui/Non");
 
                 if (user_bet_color_yn.toLowerCase() === "oui") {
                     var user_bet_color = prompt("D'accord, choisissez entre noir ou rouge:");
@@ -62,8 +71,10 @@
 
                         if (user_bet_color.toLowerCase() === couleur_aléatoire) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
+                            document.body.className = 'win'; // Changer la classe du body pour l'arrière-plan vert
                         } else {
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
+                            document.body.className = 'lose'; // Changer la classe du body pour l'arrière-plan rouge
                         }
 
                         // Activer le bouton "Restart" à la fin du jeu
@@ -73,7 +84,7 @@
                 } else {
                     container.innerHTML += "<p>Choisissez un nombre entre 0 et 36.</p>";
 
-                    var user_input_chiffre = prompt("Chiffre entre 0 et 36 ( si 0 la couleur est vert) :");
+                    var user_input_chiffre = prompt("Chiffre:");
                     var user_input_couleur;
 
                     if (user_input_chiffre === "0") {
@@ -81,7 +92,7 @@
                         user_input_couleur = "Vert";
                     } else {
                         container.innerHTML += "<p>Choisissez une couleur entre Noir et Rouge.</p>";
-                        user_input_couleur = prompt("Couleur entre noir et rouge :");
+                        user_input_couleur = prompt("Couleur:");
                     }
 
                     var nombre_aléatoire = Math.floor(Math.random() * 37);
@@ -95,8 +106,10 @@
 
                         if (user_input_chiffre == nombre_aléatoire && user_input_couleur.toLowerCase() === couleur_aléatoire) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
+                            document.body.className = 'win'; // Changer la classe du body pour l'arrière-plan vert
                         } else {
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
+                            document.body.className = 'lose'; // Changer la classe du body pour l'arrière-plan rouge
                         }
 
                         // Activer le bouton "Restart" à la fin du jeu
