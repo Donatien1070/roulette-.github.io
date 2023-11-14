@@ -28,6 +28,7 @@
         #imageContainer {
             margin-right: 20px;
             flex-shrink: 0;
+            margin-left: -20px; /* Décalage vers la gauche de l'image */
         }
 
         #imageContainer img {
@@ -88,7 +89,7 @@
                     container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
                     container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
 
-                    setTimeout(function () {
+        
                         if (userBetColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
                             document.body.className = 'win';
