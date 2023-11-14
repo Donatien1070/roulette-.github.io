@@ -15,7 +15,6 @@
             height: 100vh;
             transition: background-color 1s ease;
         }
-
         #container {
             display: flex;
             align-items: center;
@@ -24,10 +23,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         #imageContainer {
             margin-right: 20px;
             flex-shrink: 0;
+            margin-left: -20px; /* Décalage vers la gauche de l'image */
         }
 
         #imageContainer img {
@@ -35,60 +34,47 @@
             height: auto;
             border-radius: 5px;
         }
-
         #contentContainer {
             flex-grow: 1;
         }
-
         h2, h3, p {
             text-align: center;
         }
-
         body.win {
             background-color: #4CAF50;
         }
-
         body.lose {
             background-color: #FF5733;
         }
     </style>
 </head>
 <body>
-    
-<div id="imagecontainer">
+<div id="container">
     <div id="imageContainer">
         <img src="https://www.visiter-lasvegas.com/wp-content/uploads/2012/10/Tapis-roulette.jpg" alt="Tapis de roulette">
     </div>
-
     <div id="contentContainer">
         <button id="startButton" onclick="startGame()">Start</button>
         <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
         <div id="resultContainer"></div>
     </div>
-
     <script>
         function startGame() {
             document.getElementById('startButton').disabled = true;
-
             var container = document.getElementById('resultContainer');
             container.innerHTML = "<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>";
-
             var isAmericanRoulette = false;
-
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
-
                 var userBetColorYN = prompt("Voulez-vous parier sur une couleur ? Oui/Non");
-
                 if (userBetColorYN.toLowerCase() === "oui") {
                     var userBetColor = prompt("Choisissez entre noir ou rouge:");
-
                     var randomColor = (Math.random() < 0.5) ? "rouge" : "noir";
-
                     container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
                     container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
 
-        
+                    setTimeout(function () {
+
                         if (userBetColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
                             document.body.className = 'win';
@@ -96,16 +82,12 @@
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
                             document.body.className = 'lose';
                         }
-
                         document.getElementById('restartButton').disabled = false;
                     }, 5000);
-
                 } else {
                     container.innerHTML += "<p>Choisissez un nombre entre 0 et 36.</p>";
-
                     var userNumber = prompt("Chiffre:");
                     var userColor;
-
                     if (userNumber === "0") {
                         container.innerHTML += "<p>La couleur est automatiquement Vert</p>";
                         userColor = "Vert";
@@ -116,7 +98,6 @@
                         userColor = redNumbers.includes(parseInt(userNumber)) ? "rouge" : "noir";
                         container.innerHTML += "<p>Couleur automatique : " + userColor + "</p>";
                     }
-
                     var randomNumber = Math.floor(Math.random() * 37);
                     var randomColor = (randomNumber === 0) ? "Vert" : (redNumbers.includes(randomNumber)) ? "rouge" : "noir";
                     container.innerHTML += "La roue est en train de tourner .....";
@@ -125,9 +106,7 @@
                         container.innerHTML += "<p>Nombre du joueur : " + userNumber + "</p>";
                         container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
                         container.innerHTML += "<p>Nombre tiré au sort : " + randomNumber + "</p>";
-
                         var isWinner = checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette);
-
                         if (isWinner) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
                             document.body.className = 'win';
@@ -135,13 +114,11 @@
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
                             document.body.className = 'lose';
                         }
-
                         document.getElementById('restartButton').disabled = false;
                     }, 5000);
                 }
             }, 2000);
         }
-
         function checkWinner(userNumber, userColor, randomNumber, randomColor, isAmericanRoulette) {
             if (userNumber == randomNumber && userColor.toLowerCase() === randomColor) {
                 return true;
@@ -153,6 +130,5 @@
         }
     </script>
 </div>
-
 </body>
 </html>
