@@ -13,10 +13,33 @@
             height: 100vh;
             transition: background-color 1s ease;
         }
+        #mainContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        #leftContainer {
+            background-color: #f0f0f0; /* Couleur du cadre à l'extrémité gauche */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+        #leftContainer img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
         #container {
             display: flex;
             align-items: center;
-            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 40px; /* Marge entre les deux cadres */
+            flex-grow: 1;
         }
         #imageContainer {
             margin-right: 20px;
@@ -30,12 +53,6 @@
         #contentContainer {
             flex-grow: 1;
         }
-        #leftContainer {
-            background-color: #f0f0f0; /* Couleur de fond du cadre à gauche */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
         h2, h3, p {
             text-align: center;
         }
@@ -48,23 +65,25 @@
     </style>
 </head>
 <body>
-<div id="container">
+<div id="mainContainer">
     <div id="leftContainer">
-        <!-- Contenu du cadre à gauche -->
-        <h2>Cadre spécial à gauche</h2>
-        <p>Ce contenu est dans le cadre à gauche de la page.</p>
-    </div>
-    <div id="imageContainer">
+        <!-- Contenu du cadre à l'extrémité gauche -->
         <img src="https://www.visiter-lasvegas.com/wp-content/uploads/2012/10/Tapis-roulette.jpg" alt="Tapis de roulette">
     </div>
-    <div id="contentContainer">
-        <!-- Contenu du cadre central -->
-        <button id="startButton" onclick="startGame()">Start</button>
-        <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
-        <div id="resultContainer"></div>
+    <div id="container">
+        <div id="imageContainer">
+            <img src="https://www.visiter-lasvegas.com/wp-content/uploads/2012/10/Tapis-roulette.jpg" alt="Tapis de roulette">
+        </div>
+        <div id="contentContainer">
+            <!-- Reste du contenu -->
+            <button id="startButton" onclick="startGame()">Start</button>
+            <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
+            <div id="resultContainer"></div>
+        </div>
     </div>
-    <script>
-        
+</div>
+<script>
+    
         function startGame() {
             document.getElementById('startButton').disabled = true;
             var container = document.getElementById('resultContainer');
