@@ -29,9 +29,13 @@
     </style>
 </head>
 <body>
-
+    
 <div id="container">
     <button id="startButton" onclick="startGame()">Start</button>
+    
+    <!-- Déclaration du bouton Restart avant d'accéder à l'élément dans le script -->
+    <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
+    <div id="resultContainer"></div>
 
     <script>
         function startGame() {
