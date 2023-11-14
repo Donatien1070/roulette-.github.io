@@ -68,7 +68,7 @@
                 } else {
                     document.write("<p>Choisissez un nombre entre 0 et 36.</p>");
 
-                    var user_input_chiffre = prompt("Chiffre entre 0 et 36:");
+                    var user_input_chiffre = prompt("Chiffre:");
                     var user_input_couleur;
 
                     if (user_input_chiffre === "0") {
@@ -76,7 +76,7 @@
                         user_input_couleur = "Vert";
                     } else {
                         document.write("<p>Choisissez une couleur entre Noir et Rouge.</p>");
-                        user_input_couleur = prompt("Couleur entre noir et rouge:");
+                        user_input_couleur = prompt("Couleur:");
                     }
 
                     var nombre_aléatoire = Math.floor(Math.random() * 37);
@@ -95,15 +95,15 @@
                         }
 
                         // Activer le bouton "Restart" à la fin du jeu
-                        document.getElementById('restartButton').disabled = true;
+                        document.getElementById('restartButton').disabled = false;
                     }, 5000);
                 }
             }, 2000);
         }
-         <div id="resultContainer"></div>
-    <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
     </script>
 
+    <div id="resultContainer"></div>
+    <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
 </div>
 
 </body>
