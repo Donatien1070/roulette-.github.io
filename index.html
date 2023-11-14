@@ -27,12 +27,17 @@
 
         #imageContainer {
             margin-right: 20px;
+            flex-shrink: 0; /* Permet à l'image de ne pas réduire la taille du conteneur principal */
         }
 
         #imageContainer img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
+        }
+
+        #contentContainer {
+            flex-grow: 1; /* Permet au contenu de prendre tout l'espace disponible */
         }
 
         h2, h3, p {
@@ -55,7 +60,7 @@
         <img src="https://www.visiter-lasvegas.com/wp-content/uploads/2012/10/Tapis-roulette.jpg" alt="Tapis de roulette">
     </div>
 
-    <div>
+    <div id="contentContainer">
         <button id="startButton" onclick="startGame()">Start</button>
         <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
         <div id="resultContainer"></div>
