@@ -17,10 +17,22 @@
         }
 
         #container {
+            display: flex;
+            align-items: center;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #imageContainer {
+            margin-right: 20px;
+        }
+
+        #imageContainer img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
 
         h2, h3, p {
@@ -39,9 +51,15 @@
 <body>
 
 <div id="container">
-    <button id="startButton" onclick="startGame()">Start</button>
-    <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
-    <div id="resultContainer"></div>
+    <div id="imageContainer">
+        <img src="https://www.visiter-lasvegas.com/wp-content/uploads/2012/10/Tapis-roulette.jpg" alt="Tapis de roulette">
+    </div>
+
+    <div>
+        <button id="startButton" onclick="startGame()">Start</button>
+        <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
+        <div id="resultContainer"></div>
+    </div>
 
     <script>
         function startGame() {
@@ -127,7 +145,6 @@
             }
         }
     </script>
-
 </div>
 
 </body>
