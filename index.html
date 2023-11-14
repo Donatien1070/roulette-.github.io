@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino de Gogo le Rigolo</title>
+    <title>Casino de Gogo le Rigolo - Roulette</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            transition: background-color 1s ease; /* Transition de couleur pour une expérience plus agréable */
+            transition: background-color 1s ease;
         }
 
         #container {
@@ -27,13 +27,12 @@
             text-align: center;
         }
 
-        /* Ajout de classes pour les arrière-plans gagnants et perdants */
         body.win {
-            background-color: #4CAF50; /* Vert pour la victoire */
+            background-color: #4CAF50;
         }
 
         body.lose {
-            background-color: #FF5733; /* Rouge pour la défaite */
+            background-color: #FF5733;
         }
     </style>
 </head>
@@ -41,78 +40,74 @@
 
 <div id="container">
     <button id="startButton" onclick="startGame()">Start</button>
-    
-    <!-- Déclaration du bouton Restart avant d'accéder à l'élément dans le script -->
     <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
     <div id="resultContainer"></div>
 
     <script>
         function startGame() {
-            document.getElementById('startButton').disabled = true; // désactive le bouton "Start" après le démarrage
+            document.getElementById('startButton').disabled = true;
 
             var container = document.getElementById('resultContainer');
             container.innerHTML = "<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>";
 
-            var liste_couleurs = ["noir", "rouge"];
+            var colors = ["noir", "rouge"];
 
             setTimeout(function () {
                 container.innerHTML += "<h2>Le seul jeu à ce jour est la roulette!</h2>";
 
-                var user_bet_color_yn = prompt("Si vous voulez parier sur une couleur ? Si NON, vous pariez sur un nombre et une couleur. Oui/Non");
+                var userBetColorYN = prompt("Voulez-vous parier sur une couleur ? Oui/Non");
 
-                if (user_bet_color_yn.toLowerCase() === "oui") {
-                    var user_bet_color = prompt("D'accord, choisissez entre noir ou rouge:");
+                if (userBetColorYN.toLowerCase() === "oui") {
+                    var userBetColor = prompt("Choisissez entre noir ou rouge:");
 
-                    var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
+                    var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
                     setTimeout(function () {
-                        container.innerHTML += "<p>Couleur du joueur : " + user_bet_color + "</p>";
-                        container.innerHTML += "<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>";
+                        container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
+                        container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
 
-                        if (user_bet_color.toLowerCase() === couleur_aléatoire) {
+                        if (userBetColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
-                            document.body.className = 'win'; // Changer la classe du body pour l'arrière-plan vert
+                            document.body.className = 'win';
                         } else {
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
-                            document.body.className = 'lose'; // Changer la classe du body pour l'arrière-plan rouge
+                            document.body.className = 'lose';
                         }
 
-                        // Activer le bouton "Restart" à la fin du jeu
                         document.getElementById('restartButton').disabled = false;
                     }, 5000);
 
                 } else {
                     container.innerHTML += "<p>Choisissez un nombre entre 0 et 36.</p>";
 
-                    var user_input_chiffre = prompt("Chiffre:");
-                    var user_input_couleur;
+                    var userNumber = prompt("Chiffre:");
+                    var userColor;
 
-                    if (user_input_chiffre === "0") {
+                    if (userNumber === "0") {
                         container.innerHTML += "<p>La couleur est automatiquement Vert</p>";
-                        user_input_couleur = "Vert";
+                        userColor = "Vert";
                     } else {
                         container.innerHTML += "<p>Choisissez une couleur entre Noir et Rouge.</p>";
-                        user_input_couleur = prompt("Couleur:");
+                        userColor = prompt("Couleur:");
                     }
 
-                    var nombre_aléatoire = Math.floor(Math.random() * 37);
-                    var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
+                    var randomNumber = Math.floor(Math.random() * 37);
+                    var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
                     setTimeout(function () {
-                        container.innerHTML += "<p>Couleur du joueur : " + user_input_couleur + "</p>";
-                        container.innerHTML += "<p>Nombre du joueur : " + user_input_chiffre + "</p>";
-                        container.innerHTML += "<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>";
-                        container.innerHTML += "<p>Nombre tiré au sort : " + nombre_aléatoire + "</p>";
+                        container.innerHTML += "<p>Couleur du joueur : " + userColor + "</p>";
+                        container.innerHTML += "<p>Nombre du joueur : " + userNumber + "</p>";
+                        container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
+                        container.innerHTML += "<p>Nombre tiré au sort : " + randomNumber + "</p>";
 
-                        if (user_input_chiffre == nombre_aléatoire && user_input_couleur.toLowerCase() === couleur_aléatoire) {
+                        if (userNumber == randomNumber && userColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
-                            document.body.className = 'win'; // Changer la classe du body pour l'arrière-plan vert
+                            document.body.className = 'win';
                         } else {
                             container.innerHTML += "<h3>Dommage, meilleure chance la prochaine fois.</h3>";
-                            document.body.className = 'lose'; // Changer la classe du body pour l'arrière-plan rouge
+                            document.body.className = 'lose';
                         }
 
-                        // Activer le bouton "Restart" à la fin du jeu
                         document.getElementById('restartButton').disabled = false;
                     }, 5000);
                 }
