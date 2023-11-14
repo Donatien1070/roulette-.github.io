@@ -31,64 +31,78 @@
 <body>
 
 <div id="container">
+    <button id="startButton" onclick="startGame()">Start</button>
+
     <script>
-        document.write("<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>");
+        function startGame() {
+            document.getElementById('startButton').disabled = true; // désactive le bouton "Start" après le démarrage
 
-        var liste_couleurs = ["noir", "rouge"];
+            document.write("<h2>Bienvenue dans le casino de Gogo le Rigolo.</h2>");
 
-        setTimeout(function () {
-            document.write("<h2>Le seul jeu à ce jour est la roulette!</h2>");
+            var liste_couleurs = ["noir", "rouge"];
 
-            var user_bet_color_yn = prompt("Si vous voulez parier sur une couleur ? Si NON, vous pariez sur un nombre et une couleur. Oui/Non");
+            setTimeout(function () {
+                document.write("<h2>Le seul jeu à ce jour est la roulette!</h2>");
 
-            if (user_bet_color_yn.toLowerCase() === "oui") {
-                var user_bet_color = prompt("D'accord, choisissez entre noir ou rouge:");
+                var user_bet_color_yn = prompt("Si vous voulez parier sur une couleur ? Si NON, vous pariez sur un nombre et une couleur. Oui/Non");
 
-                var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
+                if (user_bet_color_yn.toLowerCase() === "oui") {
+                    var user_bet_color = prompt("D'accord, choisissez entre noir ou rouge:");
 
-                setTimeout(function () {
-                    document.write("<p>Couleur du joueur : " + user_bet_color + "</p>");
-                    document.write("<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>");
+                    var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
 
-                    if (user_bet_color.toLowerCase() === couleur_aléatoire) {
-                        document.write("<h3>Félicitations ! Vous avez gagné !</h3>");
-                    } else {
-                        document.write("<h3>Dommage, meilleure chance la prochaine fois.</h3>");
-                    }
-                }, 5000);
+                    setTimeout(function () {
+                        document.write("<p>Couleur du joueur : " + user_bet_color + "</p>");
+                        document.write("<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>");
 
-            } else {
-                document.write("<p>Choisissez un nombre entre 0 et 36.</p>");
+                        if (user_bet_color.toLowerCase() === couleur_aléatoire) {
+                            document.write("<h3>Félicitations ! Vous avez gagné !</h3>");
+                        } else {
+                            document.write("<h3>Dommage, meilleure chance la prochaine fois.</h3>");
+                        }
 
-                var user_input_chiffre = prompt("Chiffre:");
-                var user_input_couleur;
+                        // Activer le bouton "Restart" à la fin du jeu
+                        document.getElementById('restartButton').disabled = false;
+                    }, 5000);
 
-                if (user_input_chiffre === "0") {
-                    document.write("<p>La couleur est automatiquement Vert</p>");
-                    user_input_couleur = "Vert";
                 } else {
-                    document.write("<p>Choisissez une couleur entre Noir et Rouge.</p>");
-                    user_input_couleur = prompt("Couleur:");
-                }
+                    document.write("<p>Choisissez un nombre entre 0 et 36.</p>");
 
-                var nombre_aléatoire = Math.floor(Math.random() * 37);
-                var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
+                    var user_input_chiffre = prompt("Chiffre:");
+                    var user_input_couleur;
 
-                setTimeout(function () {
-                    document.write("<p>Couleur du joueur : " + user_input_couleur + "</p>");
-                    document.write("<p>Nombre du joueur : " + user_input_chiffre + "</p>");
-                    document.write("<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>");
-                    document.write("<p>Nombre tiré au sort : " + nombre_aléatoire + "</p>");
-
-                    if (user_input_chiffre == nombre_aléatoire && user_input_couleur.toLowerCase() === couleur_aléatoire) {
-                        document.write("<h3>Félicitations ! Vous avez gagné !</h3>");
+                    if (user_input_chiffre === "0") {
+                        document.write("<p>La couleur est automatiquement Vert</p>");
+                        user_input_couleur = "Vert";
                     } else {
-                        document.write("<h3>Dommage, meilleure chance la prochaine fois.</h3>");
+                        document.write("<p>Choisissez une couleur entre Noir et Rouge.</p>");
+                        user_input_couleur = prompt("Couleur:");
                     }
-                }, 5000);
-            }
-        }, 2000);
+
+                    var nombre_aléatoire = Math.floor(Math.random() * 37);
+                    var couleur_aléatoire = liste_couleurs[Math.floor(Math.random() * liste_couleurs.length)];
+
+                    setTimeout(function () {
+                        document.write("<p>Couleur du joueur : " + user_input_couleur + "</p>");
+                        document.write("<p>Nombre du joueur : " + user_input_chiffre + "</p>");
+                        document.write("<p>Couleur tirée au sort : " + couleur_aléatoire + "</p>");
+                        document.write("<p>Nombre tiré au sort : " + nombre_aléatoire + "</p>");
+
+                        if (user_input_chiffre == nombre_aléatoire && user_input_couleur.toLowerCase() === couleur_aléatoire) {
+                            document.write("<h3>Félicitations ! Vous avez gagné !</h3>");
+                        } else {
+                            document.write("<h3>Dommage, meilleure chance la prochaine fois.</h3>");
+                        }
+
+                        // Activer le bouton "Restart" à la fin du jeu
+                        document.getElementById('restartButton').disabled = false;
+                    }, 5000);
+                }
+            }, 2000);
+        }
     </script>
+
+    <button id="restartButton" onclick="location.reload();" disabled>Restart</button>
 </div>
 
 </body>
