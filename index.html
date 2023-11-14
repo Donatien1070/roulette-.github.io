@@ -117,7 +117,7 @@
 
                     var randomNumber = Math.floor(Math.random() * 37);
                     var randomColor = (randomNumber === 0) ? "Vert" : (randomNumber % 2 === 0) ? "rouge" : "noir";
-
+                        container.innerHTML += "La roue est en train de tourner .....";
                     setTimeout(function () {
                         container.innerHTML += "<p>Couleur du joueur : " + userColor + "</p>";
                         container.innerHTML += "<p>Nombre du joueur : " + userNumber + "</p>";
