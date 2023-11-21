@@ -119,7 +119,7 @@
                     setTimeout(function () {
                     container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
                     container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
-
+                    container.innerHTML += "La roue est en train de tourner .....";
                         if (userBetColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
                             document.body.className = 'win';
