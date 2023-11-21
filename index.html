@@ -116,10 +116,9 @@
                 if (userBetColorYN.toLowerCase() === "oui") {
                     var userBetColor = prompt("Choisissez entre noir ou rouge:");
                     var randomColor = (Math.random() < 0.5) ? "rouge" : "noir";
+                    setTimeout(function () {
                     container.innerHTML += "<p>Couleur du joueur : " + userBetColor + "</p>";
                     container.innerHTML += "<p>Couleur tirée au sort : " + randomColor + "</p>";
-
-                    setTimeout(function () {
 
                         if (userBetColor.toLowerCase() === randomColor) {
                             container.innerHTML += "<h3>Félicitations ! Vous avez gagné !</h3>";
